@@ -17,9 +17,9 @@ resource "aws_budgets_budget" "cost" {
 resource "aws_instance" "my-ec2" {
   ami           = "ami-0faab6bdbac9486fb"
   instance_type = "t2.micro"
-  count         = var.instance_count
+  for_each      = toset(var.instance_count)
 
   tags = {
-    Name = "test-instance-${count.index + 1}"
+    Name = "test-instance-${each.key + 1}"
   }
 }
