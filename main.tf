@@ -40,11 +40,11 @@ resource "aws_key_pair" "windows" {
 }
 
 resource "aws_instance" "my-ec2" {
-  ami             = data.aws_ami.windows-dotnet-final.id
-  instance_type   = "t2.micro"
-  for_each        = toset(var.instance_count)
-  key_name        = aws_key_pair.windows.id
-  security_groups = [aws_security_group.rdp_sg.id]
+  ami                    = data.aws_ami.windows-dotnet-final.id
+  instance_type          = "t2.micro"
+  for_each               = toset(var.instance_count)
+  key_name               = aws_key_pair.windows.id
+  vpc_security_group_ids = [aws_security_group.rdp_sg.id]
 
 
   tags = {
