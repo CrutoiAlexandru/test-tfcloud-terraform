@@ -45,6 +45,7 @@ resource "aws_instance" "my-ec2" {
   for_each               = toset(var.instance_count)
   key_name               = aws_key_pair.windows.id
   vpc_security_group_ids = [aws_security_group.rdp_sg.id]
+  get_password_data      = true
 
 
   tags = {
