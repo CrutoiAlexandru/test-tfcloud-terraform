@@ -28,6 +28,6 @@ resource "aws_instance" "my-ec2" {
   for_each      = toset(var.instance_count)
 
   tags = {
-    Name = "test-instance-${each.key + 1}"
+    Name = "test-instance-${each.key}"
   }
 }
