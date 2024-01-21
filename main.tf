@@ -74,7 +74,7 @@ resource "aws_instance" "my-ec2" {
   vpc_security_group_ids = [aws_security_group.net_win_sg.id]
   user_data              = <<-EOF
   <powershell>
-  cd "C:\Users\Administrator\test-actions-dotnet"
+  cd "C:\App"
   dotnet run --urls="http://localhost:80"
   </powershell>
   EOF
