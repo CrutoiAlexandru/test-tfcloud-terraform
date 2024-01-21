@@ -17,7 +17,7 @@ resource "aws_budgets_budget" "cost" {
 data "aws_ami" "windows-dotnet-final" {
   filter {
     name   = "name"
-    values = ["dotnet-windows-final"]
+    values = ["dotnet-windows-base"]
   }
   owners = ["self"]
 }
