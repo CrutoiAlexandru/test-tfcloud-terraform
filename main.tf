@@ -22,7 +22,7 @@ data "aws_ami" "windows-dotnet-final" {
   owners = ["self"]
 }
 
-resource "aws_security_group" "win_net_sg" {
+resource "aws_security_group" "net_win_sg" {
   name = "dotnet-windows-security-group"
 
   ingress {
