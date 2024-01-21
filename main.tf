@@ -71,7 +71,7 @@ resource "aws_instance" "my-ec2" {
   instance_type          = "t2.micro"
   for_each               = toset(var.instance_count)
   key_name               = aws_key_pair.windows.id
-  vpc_security_group_ids = [aws_security_group.win_net_sg.id]
+  vpc_security_group_ids = [aws_security_group.net_win_sg.id]
   user_data              = <<-EOF
   <powershell>
   cd "C:\Users\Administrator\test-actions-dotnet"
