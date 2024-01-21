@@ -17,7 +17,7 @@ resource "aws_budgets_budget" "cost" {
 data "aws_ami" "windows-dotnet-final" {
   filter {
     name   = "name"
-    values = ["dotnet-windows-base"]
+    values = ["dotnet-windows-final"]
   }
   owners = ["self"]
 }
@@ -36,6 +36,13 @@ resource "aws_security_group" "rdp_sg" {
   ingress {
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -66,6 +73,12 @@ resource "aws_instance" "my-ec2" {
   for_each               = toset(var.instance_count)
   key_name               = aws_key_pair.windows.id
   vpc_security_group_ids = [aws_security_group.rdp_sg.id]
+  user_data              = <<-EOF
+  <powershell>
+  cd ${var.app_path}
+  dotnet run --urls="http://localhost:5000"
+  </powershell>
+  EOF
 
   tags = {
     Name = "test-instance-${each.key}"
