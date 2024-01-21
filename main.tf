@@ -22,9 +22,8 @@ data "aws_ami" "windows-dotnet-final" {
   owners = ["self"]
 }
 
-resource "aws_security_group" "rdp_sg" {
-  name        = "rdp-security-group"
-  description = "Allow inbound RDP traffic on port 3389"
+resource "aws_security_group" "win_net_sg" {
+  name = "dotnet-windows-security-group"
 
   ingress {
     from_port   = 3389
@@ -41,8 +40,8 @@ resource "aws_security_group" "rdp_sg" {
   }
 
   ingress {
-    from_port   = 5000
-    to_port     = 5000
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -72,10 +71,10 @@ resource "aws_instance" "my-ec2" {
   instance_type          = "t2.micro"
   for_each               = toset(var.instance_count)
   key_name               = aws_key_pair.windows.id
-  vpc_security_group_ids = [aws_security_group.rdp_sg.id]
+  vpc_security_group_ids = [aws_security_group.win_net_sg.id]
   user_data              = <<-EOF
   <powershell>
-  cd ${var.app_path}
+  cd "${var.app_path}"
   dotnet run --urls="http://localhost:5000"
   </powershell>
   EOF

@@ -5,5 +5,5 @@ variable "instance_count" {
 
 variable "app_path" {
   type    = string
-  default = "C:\\Users\\Administrator\\test-actions-dotnet"
+  default = "C:\Users\Administrator\test-actions-dotnet"
 }
