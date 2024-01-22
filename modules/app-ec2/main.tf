@@ -60,7 +60,7 @@ resource "aws_instance" "my-ec2" {
   user_data              = <<-EOF
   <powershell>
   cd "C:\App"
-  dotnet run --urls="http://localhost:80"
+  dotnet run --urls="http://localhost:80" &
   </powershell>
   EOF
 

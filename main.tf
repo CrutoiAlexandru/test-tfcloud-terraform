@@ -10,7 +10,7 @@ resource "aws_budgets_budget" "cost" {
     threshold                  = 80
     threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
-    subscriber_email_addresses = ["crutoitesteurofins@gmail.com"]
+    subscriber_email_addresses = ["${var.subscriber_email}"]
   }
 }
 
