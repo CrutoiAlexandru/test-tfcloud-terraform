@@ -17,4 +17,5 @@ resource "aws_budgets_budget" "cost" {
 module "app-ec2" {
   source         = "./modules/app-ec2"
   instance_count = []
+  storage        = 30
 }
