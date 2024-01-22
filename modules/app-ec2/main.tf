@@ -52,6 +52,10 @@ resource "aws_instance" "my-ec2" {
   for_each               = toset(var.instance_count)
   vpc_security_group_ids = [aws_security_group.net_win_sg.id]
 
+  root_block_device {
+    volume_size = var.storage
+  }
+
   tags = {
     Name = "test-instance-${each.key}"
   }
